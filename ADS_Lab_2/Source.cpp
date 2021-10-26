@@ -56,7 +56,7 @@ void PolylineOfPoints2()
 			while (true)
 			{
 				system("cls");
-				//std::cout << line_1 << std::endl;
+				std::cout << line_1 << std::endl;
 				int m2 = Menu2();
 				if (m2 == 49)
 				{

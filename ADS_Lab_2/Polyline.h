@@ -18,6 +18,12 @@ struct IntPoint2 {
 	}
 };
 
+std::ostream& operator<< (std::ostream& out, const IntPoint2& point)
+{
+	out << "[" << point._x << ";" << point._y << "]";
+	return out;
+}
+
 struct DoublePoint3 {
 	double _x;
 	double _y;
@@ -35,6 +41,12 @@ struct DoublePoint3 {
 	}
 };
 
+std::ostream& operator<< (std::ostream& out, const DoublePoint3& point)
+{
+	out << "[" << point._x << ";" << point._y << ";" << point._z << "]";
+	return out;
+}
+
 //struct std::complex<double> {
 //
 //};
@@ -48,6 +60,7 @@ public:
 	Polyline(int count);
 	Polyline(const Polyline& p);
 	~Polyline();
+	size_t Vertex() const;
 	auto GetLenght() const;
 	void AddToHead(const T& point);
 	void AddToEnd(const T& point);
@@ -57,11 +70,20 @@ public:
 	bool operator == (const Polyline& polyline);
 	bool operator != (const Polyline& polyline);
 	Polyline& operator = (const Polyline& polyline);
-	//friend std::ostream& operator<< (std::ostream& out, const Polyline& polyline);
 };
 
-//template <class T>
-//std::ostream& operator<< (std::ostream& out, const Polyline<T>& polyline);
+template <class T>
+std::ostream& operator<< (std::ostream& out, const Polyline<T>& polyline)
+{
+	out << "Polyline <";
+	for (size_t i = 0; i < polyline.Vertex(); i++)
+	{
+		if (i != polyline.Vertex() - 1) out << polyline[i] << ", ";
+		else out << polyline[i];
+	}
+	out << ">";
+	return out;
+}
 
 template <class T>
 Polyline<T>::Polyline() : arr(nullptr), vertex(0) {}
@@ -90,6 +112,12 @@ Polyline<T>::~Polyline()
 {
 	delete[] arr;
 	vertex = 0;
+}
+
+template <class T>
+size_t Polyline<T>::Vertex() const
+{
+	return vertex;
 }
 
 template <class T>
@@ -208,17 +236,3 @@ Polyline<T>& Polyline<T>::operator = (const Polyline<T>& polyline)
 	}
 	return *this;
 }
-
-//template <class T>
-//std::ostream& operator<< (std::ostream& out, const Polyline<T>& polyline)
-//{
-//	out << "Polyline <";
-//	for (size_t i = 0; i < polyline.vertex; i++)
-//	{
-//		out << "vertex[" << i << "]: " << "(" << polyline.arr[i].x << "," << polyline.arr[i].y;
-//		if (i != polyline.vertex - 1) out << "); ";
-//		else out << ")";
-//	}
-//	out << ">";
-//	return out;
-//}
