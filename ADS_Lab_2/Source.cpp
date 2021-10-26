@@ -1,6 +1,5 @@
 #include <iostream>
 #include <conio.h>
-#include <locale.h>
 #include <math.h>
 #include "Polyline.h"
 
@@ -10,6 +9,17 @@ int GetKey()
 	int key = _getch();
 	if ((key == 0) || (key == 224)) key = _getch();
 	return key;
+}
+
+int MainMenu()
+{
+	std::cout << "Select:" << std::endl;
+	std::cout << "\n - 1\n - 2\n - 3\nExit - Esc" << std::endl;
+	while (true)
+	{
+		int key = GetKey();
+		if ((key == 49) || (key == 50) || (key == 51) || (key == 27)) return key;
+	}
 }
 
 
@@ -30,17 +40,6 @@ int Menu2()
 	{
 		int key = GetKey();
 		if ((key == 49) || (key == 50) || (key == 51) || (key == 52) || (key == 27)) return key;
-	}
-}
-
-int MainMenu()
-{
-	std::cout << "Select:" << std::endl;
-	std::cout << "\n - 1\n - 2\n - 3\nExit - Esc" << std::endl;
-	while (true)
-	{
-		int key = GetKey();
-		if ((key == 49) || (key == 50) || (key == 51) || (key == 27)) return key;
 	}
 }
 
@@ -438,7 +437,6 @@ void PolylineOfPoints3()
 }
 int main()
 {
-	setlocale(LC_ALL, "Russian");
 	while (true)
 	{
 		system("cls");

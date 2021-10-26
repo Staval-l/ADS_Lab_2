@@ -47,10 +47,6 @@ std::ostream& operator<< (std::ostream& out, const DoublePoint3& point)
 	return out;
 }
 
-//struct std::complex<double> {
-//
-//};
-
 template <class T>
 class Polyline {
 	T* arr;
@@ -128,6 +124,18 @@ auto Polyline<T>::GetLenght() const
 	for (size_t i = 1; i < vertex - 1; i++)
 	{
 		len += arr[i].Distance(arr[i + 1]);
+	}
+	return len;
+}
+
+template <>
+auto Polyline<std::complex<double>>::GetLenght() const
+{
+	if (arr == nullptr) throw "Line is empty";
+	double len = 0;
+	for (size_t i = 0; i < vertex - 1; i++)
+	{
+		len += std::abs(arr[i + 1].real() - arr[i].real()); // Not true
 	}
 	return len;
 }
