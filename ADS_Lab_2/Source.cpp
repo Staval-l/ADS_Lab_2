@@ -1,5 +1,5 @@
-#include <conio.h>
 #include <iostream>
+#include <conio.h>
 #include <locale.h>
 #include <math.h>
 #include "Polyline.h"
@@ -36,7 +36,7 @@ int Menu2()
 int MainMenu()
 {
 	std::cout << "Выберете тип точек, с которыми будете работать:" << std::endl;
-	std::cout << "\nТочка на плоскости с координатами типа int - 1\nТочка в пространстве с координатами типа double - 2\nТочка на комплексной плоскости - 3\nВыход - Esc" << std::endl;
+	std::cout << "\n - 1\n - 2\n - 3\nExit - Esc" << std::endl;
 	while (true)
 	{
 		int key = GetKey();
