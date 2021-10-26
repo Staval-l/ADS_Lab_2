@@ -35,7 +35,7 @@ int Menu2()
 
 int MainMenu()
 {
-	std::cout << "¬ыберете тип точек, с которыми будете работать:" << std::endl;
+	std::cout << "Select:" << std::endl;
 	std::cout << "\n - 1\n - 2\n - 3\nExit - Esc" << std::endl;
 	while (true)
 	{
