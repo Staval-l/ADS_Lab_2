@@ -652,7 +652,7 @@ void PolylineOfComplex()
 						double _im = 0;
 						std::cin >> _im;
 						std::complex<double> p(_re, _im);
-						line_1[index] = p;
+						line_2[index] = p;
 					}
 					catch (const char* err)
 					{
