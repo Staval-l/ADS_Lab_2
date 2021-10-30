@@ -1,8 +1,8 @@
 #include <iostream>
 #include <conio.h>
 #include <math.h>
+#include <complex>
 #include "Polyline.h"
-
 
 int GetKey()
 {
@@ -11,10 +11,10 @@ int GetKey()
 	return key;
 }
 
-int MainMenu()
+int FirstMenu()
 {
-	std::cout << "Select:" << std::endl;
-	std::cout << "\n - 1\n - 2\n - 3\nExit - Esc" << std::endl;
+	std::cout << "Good day! Let's start. Select type of numbers:\n" << std::endl;
+	std::cout << "1 - Work with IntPoint2\n2 - Work with DoublePoint3\n3 - Work with ComplexPoint\n\nEsc - Exit" << std::endl;
 	while (true)
 	{
 		int key = GetKey();
@@ -23,19 +23,19 @@ int MainMenu()
 }
 
 
-int Menu1()
+int SecondMenu()
 {
-	std::cout << "\nИзменить первую кривую - 1\nИзменить вторую кривую - 2\nПросмотр кривых - 3\nСравнение кривых на равенство - 4\nСравнение кривых на неравенство - 5\nСложение двух кривых - 6\nНазад - Esc" << std::endl;
+	std::cout << "1 - Work with first polyline\n2 - Work with second polyline\n3 - Show polylines\n4 - The sum of two polylines\n5 - Check polylines for equality\n\nEsc - Return back" << std::endl;
 	while (true)
 	{
 		int key = GetKey();
-		if ((key == 49) || (key == 50) || (key == 51) || (key == 52) || (key == 53) || (key == 54) || (key == 27)) return key;
+		if ((key == 49) || (key == 50) || (key == 51) || (key == 52) || (key == 53) || (key == 27)) return key;
 	}
 }
 
-int Menu2()
+int ThirdMenu()
 {
-	std::cout << "\nДобавить точку в начало кривой - 1\nДобавить точку в конец кривой - 2\nИзменить вершину по индексу - 3\nРассчитать длину кривой - 4\nНазад - Esc" << std::endl;
+	std::cout << "1 - Add point to head of the polyline\n2 - Add point to end of the polyline\n3 - Change point by index\n4 - Calculate lenght of the polyline\n\nEsc - Return back" << std::endl;
 	while (true)
 	{
 		int key = GetKey();
@@ -49,19 +49,25 @@ void PolylineOfPoints2()
 	while (true)
 	{
 		system("cls");
-		int m1 = Menu1();
+		int m1 = SecondMenu();
+		if (m1 == 27) break;
 		if (m1 == 49)
 		{
 			while (true)
 			{
 				system("cls");
 				std::cout << line_1 << std::endl;
-				int m2 = Menu2();
+				int m2 = ThirdMenu();
+				if (m2 == 27) break;
 				if (m2 == 49)
 				{
+					system("cls");
 					IntPoint2 p;
-					std::cout << "Введите координаты точки" << std::endl;
-					std::cin >> p._x >> p._y;
+					std::cout << "Enter the coordinates of the point" << std::endl;
+					std::cout << "Enter x: " << std::endl;
+					std::cin >> p._x;
+					std::cout << "Enter y: " << std::endl;
+					std::cin >> p._y;
 					try
 					{
 						line_1.AddToHead(p);
@@ -74,9 +80,13 @@ void PolylineOfPoints2()
 				}
 				if (m2 == 50)
 				{
+					system("cls");
 					IntPoint2 p;
-					std::cout << "Введите координаты точки" << std::endl;
-					std::cin >> p._x >> p._y;
+					std::cout << "Enter the coordinates of the point:" << std::endl;
+					std::cout << "Enter x: " << std::endl;
+					std::cin >> p._x;
+					std::cout << "Enter y: " << std::endl;
+					std::cin >> p._y;
 					try
 					{
 						line_1.AddToEnd(p);
@@ -89,15 +99,19 @@ void PolylineOfPoints2()
 				}
 				if (m2 == 51)
 				{
+					system("cls");
 					int index = 0;
-					std::cout << "Введите индекс координаты" << std::endl;
+					std::cout << "Enter index of element:" << std::endl;
 					std::cin >> index;
 					try
 					{
 						std::cout << "(" << line_1[index]._x << "," << line_1[index]._y << ")" << std::endl;
 						IntPoint2 p;
-						std::cout << "Введите необходимые координаты вершины" << std::endl;
-						std::cin >> p._x >> p._y;
+						std::cout << "Enter the coordinates of the point: " << std::endl;
+						std::cout << "Enter x: " << std::endl;
+						std::cin >> p._x;
+						std::cout << "Enter y: " << std::endl;
+						std::cin >> p._y;
 						line_1[index]._x = p._x;
 						line_1[index]._y = p._y;
 					}
@@ -112,8 +126,8 @@ void PolylineOfPoints2()
 					try
 					{
 						system("cls");
-						std::cout << "Длина кривой: " << line_1.GetLenght() << std::endl;
-						std::cout << "Тип возвращаемого значения: " << typeid(line_1.GetLenght()).name() << std::endl;
+						std::cout << "Polyline lenght: " << line_1.GetLenght() << std::endl;
+						std::cout << "Return type: " << typeid(line_1.GetLenght()).name() << std::endl;
 						system("pause");
 					}
 					catch (const char* err)
@@ -122,22 +136,25 @@ void PolylineOfPoints2()
 						system("pause");
 					}
 				}
-				if (m2 == 27) break;
 			}
 		}
-
 		if (m1 == 50)
 		{
 			while (true)
 			{
 				system("cls");
-				//std::cout << line_2 << std::endl;
-				int m2 = Menu2();
+				std::cout << line_2 << std::endl;
+				int m2 = ThirdMenu();
+				if (m2 == 27) break;
 				if (m2 == 49)
 				{
+					system("cls");
 					IntPoint2 p;
-					std::cout << "Введите координаты точки" << std::endl;
-					std::cin >> p._x >> p._y;
+					std::cout << "Enter the coordinates of the point:" << std::endl;
+					std::cout << "Enter x: " << std::endl;
+					std::cin >> p._x;
+					std::cout << "Enter y: " << std::endl;
+					std::cin >> p._y;
 					try
 					{
 						line_2.AddToHead(p);
@@ -150,9 +167,13 @@ void PolylineOfPoints2()
 				}
 				if (m2 == 50)
 				{
+					system("cls");
 					IntPoint2 p;
-					std::cout << "Введите координаты точки" << std::endl;
-					std::cin >> p._x >> p._y;
+					std::cout << "Enter the coordinates of the point: " << std::endl;
+					std::cout << "Enter x: " << std::endl;
+					std::cin >> p._x;
+					std::cout << "Enter y: " << std::endl;
+					std::cin >> p._y;
 					try
 					{
 						line_2.AddToEnd(p);
@@ -165,15 +186,19 @@ void PolylineOfPoints2()
 				}
 				if (m2 == 51)
 				{
+					system("cls");
 					int index = 0;
-					std::cout << "Введите индекс координаты" << std::endl;
+					std::cout << "Enter index of element: " << std::endl;
 					std::cin >> index;
 					try
 					{
 						std::cout << "(" << line_2[index]._x << "," << line_2[index]._y << ")" << std::endl;
 						IntPoint2 p;
-						std::cout << "Введите необходимые координаты вершины" << std::endl;
-						std::cin >> p._x >> p._y;
+						std::cout << "Enter the coordinates of the point: " << std::endl;
+						std::cout << "Enter x: " << std::endl;
+						std::cin >> p._x;
+						std::cout << "Enter y: " << std::endl;
+						std::cin >> p._y;
 						line_2[index]._x = p._x;
 						line_2[index]._y = p._y;
 					}
@@ -188,8 +213,8 @@ void PolylineOfPoints2()
 					try
 					{
 						system("cls");
-						std::cout << "Длина кривой: " << line_2.GetLenght() << std::endl;
-						std::cout << "Тип возвращаемого значения: " << typeid(line_2.GetLenght()).name() << std::endl;
+						std::cout << "Polyline lenght: " << line_2.GetLenght() << std::endl;
+						std::cout << "Return type: " << typeid(line_2.GetLenght()).name() << std::endl;
 						system("pause");
 					}
 					catch (const char* err)
@@ -198,43 +223,30 @@ void PolylineOfPoints2()
 						system("pause");
 					}
 				}
-				if (m2 == 27) break;
 			}
 		}
-
 		if (m1 == 51)
 		{
 			system("cls");
-			//std::cout << line_1 << std::endl;
-			//std::cout << line_2 << std::endl;
+			std::cout << line_1 << std::endl;
+			std::cout << line_2 << std::endl;
 			system("pause");
 		}
-
 		if (m1 == 52)
 		{
 			system("cls");
-			//if (line_1 == line_2) std::cout << "Верно" << std::endl;
-			//else std::cout << "Неверно" << std::endl;
+			line_1 = line_1 + line_2;
+			std::cout << "Successfully" << std::endl;
+			std::cout << line_1 << std::endl;
 			system("pause");
 		}
-
 		if (m1 == 53)
 		{
 			system("cls");
-			if (line_1 != line_2) std::cout << "Верно" << std::endl;
-			else std::cout << "Неверно" << std::endl;
+			if (line_1 == line_2) std::cout << "Lines are equal" << std::endl;
+			else std::cout << "Lines aren't equal" << std::endl;
 			system("pause");
 		}
-
-		if (m1 == 54)
-		{
-			system("cls");
-			Polyline<IntPoint2> result = line_1 + line_2;
-			//std::cout << result << std::endl;
-			system("pause");
-		}
-
-		if (m1 == 27) break;
 	}
 }
 
@@ -244,19 +256,27 @@ void PolylineOfPoints3()
 	while (true)
 	{
 		system("cls");
-		int m1 = Menu1();
+		int m1 = SecondMenu();
+		if (m1 == 27) break;
 		if (m1 == 49)
 		{
 			while (true)
 			{
 				system("cls");
-				//std::cout << line_1 << std::endl;
-				int m2 = Menu2();
+				std::cout << line_1 << std::endl;
+				int m2 = ThirdMenu();
+				if (m2 == 27) break;
 				if (m2 == 49)
 				{
+					system("cls");
 					DoublePoint3 p;
-					std::cout << "Введите координаты точки" << std::endl;
-					std::cin >> p._x >> p._y >> p._z;
+					std::cout << "Enter the coordinates of the point: " << std::endl;
+					std::cout << "Enter x: " << std::endl;
+					std::cin >> p._x;
+					std::cout << "Enter y: " << std::endl;
+					std::cin >> p._y;
+					std::cout << "Enter z: " << std::endl;
+					std::cin >> p._z;
 					try
 					{
 						line_1.AddToHead(p);
@@ -269,9 +289,15 @@ void PolylineOfPoints3()
 				}
 				if (m2 == 50)
 				{
+					system("cls");
 					DoublePoint3 p;
-					std::cout << "Введите координаты точки" << std::endl;
-					std::cin >> p._x >> p._y >> p._z;
+					std::cout << "Enter the coordinates of the point: " << std::endl;
+					std::cout << "Enter x: " << std::endl;
+					std::cin >> p._x;
+					std::cout << "Enter y: " << std::endl;
+					std::cin >> p._y;
+					std::cout << "Enter z: " << std::endl;
+					std::cin >> p._z;
 					try
 					{
 						line_1.AddToEnd(p);
@@ -284,15 +310,21 @@ void PolylineOfPoints3()
 				}
 				if (m2 == 51)
 				{
+					system("cls");
 					int index = 0;
-					std::cout << "Введите индекс координаты" << std::endl;
+					std::cout << "Enter index of element: " << std::endl;
 					std::cin >> index;
 					try
 					{
-						std::cout << "(" << line_1[index]._x << "," << line_1[index]._y << line_1[index]._z << ")" << std::endl;
+						std::cout << "(" << line_1[index]._x << "," << line_1[index]._y << "," << line_1[index]._z << ")" << std::endl;
 						DoublePoint3 p;
-						std::cout << "Введите необходимые координаты вершины" << std::endl;
-						std::cin >> p._x >> p._y >> p._z;
+						std::cout << "Enter the coordinates of the point: " << std::endl;
+						std::cout << "Enter x: " << std::endl;
+						std::cin >> p._x;
+						std::cout << "Enter y: " << std::endl;
+						std::cin >> p._y;
+						std::cout << "Enter z: " << std::endl;
+						std::cin >> p._z;
 						line_1[index]._x = p._x;
 						line_1[index]._y = p._y;
 						line_1[index]._z = p._z;
@@ -308,8 +340,8 @@ void PolylineOfPoints3()
 					try
 					{
 						system("cls");
-						std::cout << "Длина кривой: " << line_1.GetLenght() << std::endl;
-						std::cout << "Тип возвращаемого значения: " << typeid(line_1.GetLenght()).name() << std::endl;
+						std::cout << "Polyline lenght: " << line_1.GetLenght() << std::endl;
+						std::cout << "Return type: " << typeid(line_1.GetLenght()).name() << std::endl;
 						system("pause");
 					}
 					catch (const char* err)
@@ -318,22 +350,27 @@ void PolylineOfPoints3()
 						system("pause");
 					}
 				}
-				if (m2 == 27) break;
 			}
 		}
-
 		if (m1 == 50)
 		{
 			while (true)
 			{
 				system("cls");
-				//std::cout << line_2 << std::endl;
-				int m2 = Menu2();
+				std::cout << line_2 << std::endl;
+				int m2 = ThirdMenu();
+				if (m2 == 27) break;
 				if (m2 == 49)
 				{
+					system("cls");
 					DoublePoint3 p;
-					std::cout << "Введите координаты точки" << std::endl;
-					std::cin >> p._x >> p._y >> p._z;
+					std::cout << "Enter the coordinates of the point: " << std::endl;
+					std::cout << "Enter x: " << std::endl;
+					std::cin >> p._x;
+					std::cout << "Enter y: " << std::endl;
+					std::cin >> p._y;
+					std::cout << "Enter z: " << std::endl;
+					std::cin >> p._z;
 					try
 					{
 						line_2.AddToHead(p);
@@ -346,9 +383,15 @@ void PolylineOfPoints3()
 				}
 				if (m2 == 50)
 				{
+					system("cls");
 					DoublePoint3 p;
-					std::cout << "Введите координаты точки" << std::endl;
-					std::cin >> p._x >> p._y >> p._z;
+					std::cout << "Enter the coordinates of the point: " << std::endl;
+					std::cout << "Enter x: " << std::endl;
+					std::cin >> p._x;
+					std::cout << "Enter y: " << std::endl;
+					std::cin >> p._y;
+					std::cout << "Enter z: " << std::endl;
+					std::cin >> p._z;
 					try
 					{
 						line_2.AddToEnd(p);
@@ -361,15 +404,21 @@ void PolylineOfPoints3()
 				}
 				if (m2 == 51)
 				{
+					system("cls");
 					int index = 0;
-					std::cout << "Введите индекс координаты" << std::endl;
+					std::cout << "Enter index of element: " << std::endl;
 					std::cin >> index;
 					try
 					{
-						std::cout << "(" << line_2[index]._x << "," << line_2[index]._y << line_2[index]._z << ")" << std::endl;
+						std::cout << "(" << line_2[index]._x << "," << line_2[index]._y << "," << line_2[index]._z << ")" << std::endl;
 						DoublePoint3 p;
-						std::cout << "Введите необходимые координаты вершины" << std::endl;
-						std::cin >> p._x >> p._y >> p._z;
+						std::cout << "Enter the coordinates of the point: " << std::endl;
+						std::cout << "Enter x: " << std::endl;
+						std::cin >> p._x;
+						std::cout << "Enter y: " << std::endl;
+						std::cin >> p._y;
+						std::cout << "Enter z: " << std::endl;
+						std::cin >> p._z;
 						line_2[index]._x = p._x;
 						line_2[index]._y = p._y;
 						line_2[index]._z = p._z;
@@ -385,9 +434,8 @@ void PolylineOfPoints3()
 					try
 					{
 						system("cls");
-						auto length = line_2.GetLenght();
-						std::cout << "Длина кривой: " << length << std::endl;
-						std::cout << "Тип возвращаемого значения: " << typeid(length).name() << std::endl;
+						std::cout << "Polyline lenght: " << line_2.GetLenght() << std::endl;
+						std::cout << "Return type: " << typeid(line_2.GetLenght()).name() << std::endl;
 						system("pause");
 					}
 					catch (const char* err)
@@ -396,59 +444,155 @@ void PolylineOfPoints3()
 						system("pause");
 					}
 				}
-				if (m2 == 27) break;
 			}
 		}
-
 		if (m1 == 51)
 		{
 			system("cls");
-			//std::cout << line_1 << std::endl;
-			//std::cout << line_2 << std::endl;
+			std::cout << line_1 << std::endl;
+			std::cout << line_2 << std::endl;
 			system("pause");
 		}
-
 		if (m1 == 52)
 		{
 			system("cls");
-			if (line_1 == line_2) std::cout << "Верно" << std::endl;
-			else std::cout << "Неверно" << std::endl;
+			line_1 = line_1 + line_2;
+			std::cout << "Successfully" << std::endl;
+			std::cout << line_1 << std::endl;
 			system("pause");
 		}
-
 		if (m1 == 53)
 		{
 			system("cls");
-			if (line_1 != line_2) std::cout << "Верно" << std::endl;
-			else std::cout << "Неверно" << std::endl;
+			if (line_1 == line_2) std::cout << "Lines are equal" << std::endl;
+			else std::cout << "Lines aren't equal" << std::endl;
 			system("pause");
 		}
-
-		if (m1 == 54)
-		{
-			system("cls");
-			Polyline<DoublePoint3> result = line_1 + line_2;
-			//std::cout << result << std::endl;
-			system("pause");
-		}
-
-		if (m1 == 27) break;
 	}
 }
+
+void PolylineOfComplex()
+{
+	Polyline<std::complex<double>> line_1, line_2;
+	while (true)
+	{
+		system("cls");
+		int m1 = SecondMenu();
+		if (m1 == 27) break;
+		if (m1 == 49)
+		{
+			while (true)
+			{
+				system("cls");
+				std::cout << line_1 << std::endl;
+				int m2 = ThirdMenu();
+				if (m2 == 27) break;
+				if (m2 == 49)
+				{
+					system("cls");
+					std::cout << "Enter the coordinates of the point: " << std::endl;
+					std::cout << "Enter real part: " << std::endl;
+					double _re = 0;
+					std::cin >> _re;
+					std::cout << "Enter imag part: " << std::endl;
+					double _im = 0;
+					std::cin >> _im;
+					std::complex<double> p(_re, _im);
+					try
+					{
+						line_1.AddToHead(p);
+					}
+					catch (const char* err)
+					{
+						std::cout << err << std::endl;
+						system("pause");
+					}
+				}
+				if (m2 == 50)
+				{
+					system("cls");
+					std::complex<double> p;
+					std::cout << "Enter the coordinates of the point: " << std::endl;
+					std::cout << "Enter real part: " << std::endl;
+					double _re = 0;
+					std::cin >> _re;
+					_re *= p.real();
+					std::cout << "Enter imag part: " << std::endl;
+					double _im = 0;
+					std::cin >> _im;
+					_im *= p.imag();
+					try
+					{
+						line_1.AddToEnd(p);
+					}
+					catch (const char* err)
+					{
+						std::cout << err << std::endl;
+						system("pause");
+					}
+				}
+				if (m2 == 51)
+				{
+					system("cls");
+					int index = 0;
+					std::cout << "Enter index of element:" << std::endl;
+					std::cin >> index;
+					try
+					{
+						std::cout << "(" << line_1[index].real() << "," << line_1[index].imag() << ")" << std::endl;
+						std::cout << "Enter the coordinates of the point: " << std::endl;
+						double _re = 0;
+						std::cin >> _re;
+						//_re *= p.real();
+						//_re *= line_1[index].real();
+						std::cout << "Enter imag part: " << std::endl;
+						double _im = 0;
+						std::cin >> _im;
+						std::complex<double> p(_re, _im);
+						std::cout << p << std::endl;
+						//_im *= p.imag();
+						//_im *= line_1[index].imag();
+					}
+					catch (const char* err)
+					{
+						std::cout << err << std::endl;
+						system("pause");
+					}
+				}
+				if (m2 == 52)
+				{
+					try
+					{
+						system("cls");
+						std::cout << "Polyline lenght: " << line_1.GetLenght() << std::endl;
+						std::cout << "Return type: " << typeid(line_1.GetLenght()).name() << std::endl;
+						system("pause");
+					}
+					catch (const char* err)
+					{
+						std::cout << err << std::endl;
+						system("pause");
+					}
+				}
+			}
+		}
+		if (m1 == 50)
+		{
+
+		}
+	}
+}
+
 int main()
 {
 	while (true)
 	{
 		system("cls");
-		int polyline_type = MainMenu();
-
-		if (polyline_type == 49) PolylineOfPoints2();
-
-		if (polyline_type == 50) PolylineOfPoints3();
-
-		if (polyline_type == 51) continue;
-
-		if (polyline_type == 27) break;
+		int m = FirstMenu();
+		if (m == 27) break;
+		if (m == 49) PolylineOfPoints2();
+		if (m == 50) PolylineOfPoints3();
+		if (m == 51) PolylineOfComplex();
 	}
 	return 0;
 }

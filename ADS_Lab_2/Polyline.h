@@ -47,6 +47,12 @@ std::ostream& operator<< (std::ostream& out, const DoublePoint3& point)
 	return out;
 }
 
+std::ostream& operator<< (std::ostream& out, const std::complex<double>& point)
+{
+	out << "[" << point.real() << ";" << point.imag() << "]";
+	return out;
+}
+
 template <class T>
 class Polyline {
 	T* arr;
@@ -63,8 +69,8 @@ public:
 	T& operator [] (const size_t index);
 	T operator [] (const size_t index) const;
 	Polyline operator + (const Polyline& polyline);
-	bool operator == (const Polyline& polyline);
-	bool operator != (const Polyline& polyline);
+	bool operator == (const Polyline& polyline) const;
+	bool operator != (const Polyline& polyline) const;
 	Polyline& operator = (const Polyline& polyline);
 };
 
@@ -120,6 +126,7 @@ template <class T>
 auto Polyline<T>::GetLenght() const
 {
 	if (arr == nullptr) throw "Line is empty";
+	if (Vertex() == 1) throw "Only one point in line";
 	auto len = arr[0].Distance(arr[1]);
 	for (size_t i = 1; i < vertex - 1; i++)
 	{
@@ -132,10 +139,11 @@ template <>
 auto Polyline<std::complex<double>>::GetLenght() const
 {
 	if (arr == nullptr) throw "Line is empty";
+	if (Vertex() == 1) throw "Only one point in line";
 	double len = 0;
 	for (size_t i = 0; i < vertex - 1; i++)
 	{
-		len += std::abs(arr[i + 1].real() - arr[i].real()); // Not true
+		len += std::abs(arr[i + 1] - arr[i]);
 	}
 	return len;
 }
@@ -202,7 +210,7 @@ Polyline<T> Polyline<T>::operator + (const Polyline<T>& polyline)
 }
 
 template <class T>
-bool Polyline<T>::operator == (const Polyline<T>& polyline)
+bool Polyline<T>::operator == (const Polyline<T>& polyline) const
 {
 	if (vertex != polyline.vertex) return false;
 	for (size_t i = 0; i < vertex; i++)
@@ -213,7 +221,7 @@ bool Polyline<T>::operator == (const Polyline<T>& polyline)
 }
 
 template <class T>
-bool Polyline<T>::operator != (const Polyline<T>& polyline)
+bool Polyline<T>::operator != (const Polyline<T>& polyline) const
 {
 	if (vertex != polyline.vertex) return true;
 	for (size_t i = 0; i < vertex; i++)
