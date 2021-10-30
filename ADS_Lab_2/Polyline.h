@@ -6,7 +6,7 @@ struct IntPoint2 {
 	int _x;
 	int _y;
 
-	bool operator==(const IntPoint2& p)
+	bool operator==(const IntPoint2& p) const
 	{
 		if ((_x == p._x) && (_y == p._y)) return true;
 		else return false;
@@ -29,7 +29,7 @@ struct DoublePoint3 {
 	double _y;
 	double _z;
 
-	bool operator==(const DoublePoint3& p)
+	bool operator==(const DoublePoint3& p) const
 	{
 		if ((_x == p._x) && (_y == p._y) && (_z == p._z)) return true;
 		else return false;
@@ -49,7 +49,7 @@ std::ostream& operator<< (std::ostream& out, const DoublePoint3& point)
 
 std::ostream& operator<< (std::ostream& out, const std::complex<double>& point)
 {
-	out << "[" << point.real() << ";" << point.imag() << "]";
+	out << "[" << point.real() << ";" << point.imag() << " * i" << "]";
 	return out;
 }
 

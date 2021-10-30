@@ -25,11 +25,11 @@ int FirstMenu()
 
 int SecondMenu()
 {
-	std::cout << "1 - Work with first polyline\n2 - Work with second polyline\n3 - Show polylines\n4 - The sum of two polylines\n5 - Check polylines for equality\n\nEsc - Return back" << std::endl;
+	std::cout << "1 - Work with first polyline\n2 - Work with second polyline\n3 - Show polylines\n4 - The sum of two polylines in first\n5 - The sum of two polylines in second\n6 - Check polylines for equality\n\nEsc - Return back" << std::endl;
 	while (true)
 	{
 		int key = GetKey();
-		if ((key == 49) || (key == 50) || (key == 51) || (key == 52) || (key == 53) || (key == 27)) return key;
+		if ((key == 49) || (key == 50) || (key == 51) || (key == 52) || (key == 53) || (key == 54) || (key == 27)) return key;
 	}
 }
 
@@ -241,6 +241,14 @@ void PolylineOfPoints2()
 			system("pause");
 		}
 		if (m1 == 53)
+		{
+			system("cls");
+			line_2 = line_2 + line_1;
+			std::cout << "Successfully" << std::endl;
+			std::cout << line_2 << std::endl;
+			system("pause");
+		}
+		if (m1 == 54)
 		{
 			system("cls");
 			if (line_1 == line_2) std::cout << "Lines are equal" << std::endl;
@@ -464,6 +472,14 @@ void PolylineOfPoints3()
 		if (m1 == 53)
 		{
 			system("cls");
+			line_2 = line_2 + line_1;
+			std::cout << "Successfully" << std::endl;
+			std::cout << line_2 << std::endl;
+			system("pause");
+		}
+		if (m1 == 54)
+		{
+			system("cls");
 			if (line_1 == line_2) std::cout << "Lines are equal" << std::endl;
 			else std::cout << "Lines aren't equal" << std::endl;
 			system("pause");
@@ -511,16 +527,14 @@ void PolylineOfComplex()
 				if (m2 == 50)
 				{
 					system("cls");
-					std::complex<double> p;
 					std::cout << "Enter the coordinates of the point: " << std::endl;
 					std::cout << "Enter real part: " << std::endl;
 					double _re = 0;
 					std::cin >> _re;
-					_re *= p.real();
 					std::cout << "Enter imag part: " << std::endl;
 					double _im = 0;
 					std::cin >> _im;
-					_im *= p.imag();
+					std::complex<double> p(_re, _im);
 					try
 					{
 						line_1.AddToEnd(p);
@@ -534,24 +548,20 @@ void PolylineOfComplex()
 				if (m2 == 51)
 				{
 					system("cls");
-					int index = 0;
-					std::cout << "Enter index of element:" << std::endl;
-					std::cin >> index;
 					try
 					{
+						int index = 0;
+						std::cout << "Enter index of element:" << std::endl;
+						std::cin >> index;
 						std::cout << "(" << line_1[index].real() << "," << line_1[index].imag() << ")" << std::endl;
 						std::cout << "Enter the coordinates of the point: " << std::endl;
 						double _re = 0;
 						std::cin >> _re;
-						//_re *= p.real();
-						//_re *= line_1[index].real();
 						std::cout << "Enter imag part: " << std::endl;
 						double _im = 0;
 						std::cin >> _im;
 						std::complex<double> p(_re, _im);
-						std::cout << p << std::endl;
-						//_im *= p.imag();
-						//_im *= line_1[index].imag();
+						line_1[index] = p;
 					}
 					catch (const char* err)
 					{
@@ -578,7 +588,124 @@ void PolylineOfComplex()
 		}
 		if (m1 == 50)
 		{
-
+			while (true)
+			{
+				system("cls");
+				std::cout << line_2 << std::endl;
+				int m2 = ThirdMenu();
+				if (m2 == 27) break;
+				if (m2 == 49)
+				{
+					system("cls");
+					std::cout << "Enter the coordinates of the point: " << std::endl;
+					std::cout << "Enter real part: " << std::endl;
+					double _re = 0;
+					std::cin >> _re;
+					std::cout << "Enter imag part: " << std::endl;
+					double _im = 0;
+					std::cin >> _im;
+					std::complex<double> p(_re, _im);
+					try
+					{
+						line_2.AddToHead(p);
+					}
+					catch (const char* err)
+					{
+						std::cout << err << std::endl;
+						system("pause");
+					}
+				}
+				if (m2 == 50)
+				{
+					system("cls");
+					std::cout << "Enter the coordinates of the point: " << std::endl;
+					std::cout << "Enter real part: " << std::endl;
+					double _re = 0;
+					std::cin >> _re;
+					std::cout << "Enter imag part: " << std::endl;
+					double _im = 0;
+					std::cin >> _im;
+					std::complex<double> p(_re, _im);
+					try
+					{
+						line_2.AddToEnd(p);
+					}
+					catch (const char* err)
+					{
+						std::cout << err << std::endl;
+						system("pause");
+					}
+				}
+				if (m2 == 51)
+				{
+					system("cls");
+					try
+					{
+						int index = 0;
+						std::cout << "Enter index of element:" << std::endl;
+						std::cin >> index;
+						std::cout << "(" << line_2[index].real() << "," << line_2[index].imag() << ")" << std::endl;
+						std::cout << "Enter the coordinates of the point: " << std::endl;
+						double _re = 0;
+						std::cin >> _re;
+						std::cout << "Enter imag part: " << std::endl;
+						double _im = 0;
+						std::cin >> _im;
+						std::complex<double> p(_re, _im);
+						line_1[index] = p;
+					}
+					catch (const char* err)
+					{
+						std::cout << err << std::endl;
+						system("pause");
+					}
+				}
+				if (m2 == 52)
+				{
+					try
+					{
+						system("cls");
+						std::cout << "Polyline lenght: " << line_2.GetLenght() << std::endl;
+						std::cout << "Return type: " << typeid(line_2.GetLenght()).name() << std::endl;
+						system("pause");
+					}
+					catch (const char* err)
+					{
+						std::cout << err << std::endl;
+						system("pause");
+					}
+				}
+			}
+		}
+		if (m1 == 51)
+		{
+			system("cls");
+			std::cout << line_1 << std::endl;
+			std::cout << line_2 << std::endl;
+			system("pause");
+		}
+		if (m1 == 52)
+		{
+			system("cls");
+			line_1 = line_1 + line_2;
+			std::cout << "Successfully" << std::endl;
+			std::cout << line_1 << std::endl;
+			system("pause");
+		}
+		if (m1 == 53)
+		{
+			system("cls");
+			line_2 = line_2 + line_1;
+			std::cout << "Successfully" << std::endl;
+			std::cout << line_2 << std::endl;
+			system("pause");
+		}
+		if (m1 == 54)
+		{
+			system("cls");
+			if (line_1 == line_2) std::cout << "Lines are equal" << std::endl;
+			else std::cout << "Lines aren't equal" << std::endl;
+			system("pause");
 		}
 	}
 }
