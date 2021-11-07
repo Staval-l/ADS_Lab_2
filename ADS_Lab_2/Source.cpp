@@ -2,6 +2,7 @@
 #include <conio.h>
 #include <math.h>
 #include <complex>
+#include <vector>
 #include "Polyline.h"
 
 int GetKey()

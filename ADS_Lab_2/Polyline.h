@@ -1,6 +1,7 @@
 #pragma once
 #include <complex>
 #include <iostream>
+#include <vector>
 
 struct IntPoint2 {
 	int _x;
