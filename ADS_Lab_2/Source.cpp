@@ -22,7 +22,6 @@ int FirstMenu()
 	}
 }
 
-
 int SecondMenu()
 {
 	std::cout << "1 - Work with first polyline\n2 - Work with second polyline\n3 - Show polylines\n4 - The sum of two polylines in first\n5 - The sum of two polylines in second\n6 - Check polylines for equality\n\nEsc - Return back" << std::endl;
@@ -555,6 +554,7 @@ void PolylineOfComplex()
 						std::cin >> index;
 						std::cout << "(" << line_1[index].real() << "," << line_1[index].imag() << ")" << std::endl;
 						std::cout << "Enter the coordinates of the point: " << std::endl;
+						std::cout << "Enter real part: " << std::endl;
 						double _re = 0;
 						std::cin >> _re;
 						std::cout << "Enter imag part: " << std::endl;
@@ -646,6 +646,7 @@ void PolylineOfComplex()
 						std::cin >> index;
 						std::cout << "(" << line_2[index].real() << "," << line_2[index].imag() << ")" << std::endl;
 						std::cout << "Enter the coordinates of the point: " << std::endl;
+						std::cout << "Enter real part: " << std::endl;
 						double _re = 0;
 						std::cin >> _re;
 						std::cout << "Enter imag part: " << std::endl;
