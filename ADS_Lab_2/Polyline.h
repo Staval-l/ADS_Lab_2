@@ -36,7 +36,7 @@ struct DoublePoint3 {
 		else return false;
 	}
 
-	double Distance(const DoublePoint3& p)
+	double Distance(const DoublePoint3& p) const
 	{
 		return sqrt(pow(_x - p._x, 2) + pow(_y - p._y, 2) + pow(_z - p._z, 2));
 	}
@@ -56,13 +56,14 @@ std::ostream& operator<< (std::ostream& out, const std::complex<double>& point)
 
 template <class T>
 class Polyline {
-	T* arr;
-	size_t vertex;
+	std::vector<T> v;
+	/*T* arr;
+	size_t vertex;*/
 public:
-	Polyline();
+	/*Polyline();
 	Polyline(int count);
 	Polyline(const Polyline& p);
-	~Polyline();
+	~Polyline();*/
 	size_t Vertex() const;
 	auto GetLenght() const;
 	void AddToHead(const T& point);
@@ -88,50 +89,50 @@ std::ostream& operator<< (std::ostream& out, const Polyline<T>& polyline)
 	return out;
 }
 
-template <class T>
-Polyline<T>::Polyline() : arr(nullptr), vertex(0) {}
-
-template <class T>
-Polyline<T>::Polyline(int count)
-{
-	if (count < 0) throw "Invalid index";
-	arr = new T[count];
-	vertex = count;
-}
-
-template <class T>
-Polyline<T>::Polyline(const Polyline<T>& p)
-{
-	arr = new T[p.vertex];
-	vertex = p.vertex;
-	for (size_t i = 0; i < vertex; i++)
-	{
-		arr[i] = p.arr[i];
-	}
-}
-
-template <class T>
-Polyline<T>::~Polyline()
-{
-	delete[] arr;
-	vertex = 0;
-}
+//template <class T>
+//Polyline<T>::Polyline() : arr(nullptr), vertex(0) {}
+//
+//template <class T>
+//Polyline<T>::Polyline(int count)
+//{
+//	if (count < 0) throw "Invalid index";
+//	arr = new T[count];
+//	vertex = count;
+//}
+//
+//template <class T>
+//Polyline<T>::Polyline(const Polyline<T>& p)
+//{
+//	arr = new T[p.vertex];
+//	vertex = p.vertex;
+//	for (size_t i = 0; i < vertex; i++)
+//	{
+//		arr[i] = p.arr[i];
+//	}
+//}
+//
+//template <class T>
+//Polyline<T>::~Polyline()
+//{
+//	delete[] arr;
+//	vertex = 0;
+//}
 
 template <class T>
 size_t Polyline<T>::Vertex() const
 {
-	return vertex;
+	return v.size();
 }
 
 template <class T>
 auto Polyline<T>::GetLenght() const
 {
-	if (arr == nullptr) throw "Line is empty";
+	if (v.empty()) throw "Line is empty";
 	if (Vertex() == 1) throw "Only one point in line";
-	auto len = arr[0].Distance(arr[1]);
-	for (size_t i = 1; i < vertex - 1; i++)
+	auto len = 0.0;
+	for (size_t i = 0; i < Vertex() - 1; i++)
 	{
-		len += arr[i].Distance(arr[i + 1]);
+		len += v[i].Distance(v[i + 1]);
 	}
 	return len;
 }
@@ -139,12 +140,12 @@ auto Polyline<T>::GetLenght() const
 template <>
 auto Polyline<std::complex<double>>::GetLenght() const
 {
-	if (arr == nullptr) throw "Line is empty";
+	if (v.empty()) throw "Line is empty";
 	if (Vertex() == 1) throw "Only one point in line";
 	double len = 0;
-	for (size_t i = 0; i < vertex - 1; i++)
+	for (size_t i = 0; i < Vertex() - 1; i++)
 	{
-		len += std::abs(arr[i + 1] - arr[i]);
+		len += std::abs(v[i + 1] - v[i]);
 	}
 	return len;
 }
@@ -152,7 +153,8 @@ auto Polyline<std::complex<double>>::GetLenght() const
 template <class T>
 void Polyline<T>::AddToHead(const T& point)
 {
-	vertex += 1;
+	v.insert(v.begin(), point);
+	/*vertex += 1;
 	T* tmp = new T[vertex];
 	tmp[0] = point;
 	for (size_t i = 1; i < vertex; i++)
@@ -160,13 +162,14 @@ void Polyline<T>::AddToHead(const T& point)
 		tmp[i] = arr[i - 1];
 	}
 	if (arr != NULL) delete[] arr;
-	arr = tmp;
+	arr = tmp;*/
 }
 
 template <class T>
 void Polyline<T>::AddToEnd(const T& point)
 {
-	vertex += 1;
+	v.push_back(point);
+	/*vertex += 1;
 	T* tmp = new T[vertex];
 	for (size_t i = 0; i < vertex - 1; i++)
 	{
@@ -174,38 +177,39 @@ void Polyline<T>::AddToEnd(const T& point)
 	}
 	tmp[vertex - 1] = point;
 	if (arr != NULL) delete[] arr;
-	arr = tmp;
+	arr = tmp;*/
 }
 
 template <class T>
 T& Polyline<T>::operator [] (const size_t index)
 {
-	if (arr == nullptr) throw "Line is empty";
-	if ((index >= vertex) || (index < 0)) throw "Invalid index";
-	return arr[index];
+	if (v.empty()) throw "Line is empty";
+	if ((index >= Vertex()) || (index < 0)) throw "Invalid index";
+	return v[index];
 }
 
 template <class T>
 T Polyline<T>::operator [] (const size_t index) const
 {
-	if (arr == nullptr) throw "Line is empty";
-	if ((index >= vertex) || (index < 0)) throw "Invalid index";
-	return arr[index];
+	if (v.empty()) throw "Line is empty";
+	if ((index >= Vertex()) || (index < 0)) throw "Invalid index";
+	return v[index];
 }
 
 template <class T>
 Polyline<T> Polyline<T>::operator + (const Polyline<T>& polyline)
 {
-	if (!vertex) return polyline;
-	if (!polyline.vertex) return *this;
-	Polyline res(vertex + polyline.vertex);
-	for (size_t i = 0; i < vertex; i++)
+	if (v.empty()) return polyline;
+	if (!polyline.Vertex()) return *this;
+	Polyline res(polyline);
+	//Polyline res(vertex + polyline.vertex);
+	for (size_t i = 0; i < Vertex(); i++)
 	{
-		res.arr[i] = arr[i];
+		res.v[i] = v[i];
 	}
-	for (size_t i = 0; i < polyline.vertex; i++)
+	for (size_t i = 0; i < polyline.Vertex(); i++)
 	{
-		res.arr[vertex + i] = polyline.arr[i];
+		res.v[Vertex() + i] = polyline.v[i];
 	}
 	return res;
 }
@@ -213,10 +217,10 @@ Polyline<T> Polyline<T>::operator + (const Polyline<T>& polyline)
 template <class T>
 bool Polyline<T>::operator == (const Polyline<T>& polyline) const
 {
-	if (vertex != polyline.vertex) return false;
-	for (size_t i = 0; i < vertex; i++)
+	if (Vertex() != polyline.Vertex()) return false;
+	for (size_t i = 0; i < Vertex(); i++)
 	{
-		if (!(arr[i] == polyline.arr[i])) return false;
+		if (!(v[i] == polyline.v[i])) return false;
 	}
 	return true;
 }
@@ -224,10 +228,10 @@ bool Polyline<T>::operator == (const Polyline<T>& polyline) const
 template <class T>
 bool Polyline<T>::operator != (const Polyline<T>& polyline) const
 {
-	if (vertex != polyline.vertex) return true;
-	for (size_t i = 0; i < vertex; i++)
+	if (Vertex() != polyline.Vertex()) return true;
+	for (size_t i = 0; i < Vertex(); i++)
 	{
-		if (!(arr[i] == polyline.arr[i])) return true;
+		if (!(v[i] == polyline.v[i])) return true;
 	}
 	return false;
 }
@@ -236,20 +240,17 @@ template <class T>
 Polyline<T>& Polyline<T>::operator = (const Polyline<T>& polyline)
 {
 	if (this == (&polyline)) return *this;
-	if (arr) delete[] arr;
-	if (polyline.arr)
+	if (!v.empty()) v.clear();
+	if (!polyline.v.empty())
 	{
-		arr = new T[polyline.vertex];
-		vertex = polyline.vertex;
-		for (size_t i = 0; i < polyline.vertex; i++)
+		for (size_t i = 0; i < Vertex(); i++)
 		{
-			arr[i] = polyline.arr[i];
+			v[i] = polyline.v[i];
 		}
 	}
 	else
 	{
-		arr = NULL;
-		vertex = 0;
+		v.resize(0);
 	}
 	return *this;
 }

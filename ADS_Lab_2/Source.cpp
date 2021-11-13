@@ -236,17 +236,19 @@ void PolylineOfPoints2()
 		if (m1 == 52)
 		{
 			system("cls");
-			line_1 = line_1 + line_2;
+			Polyline<IntPoint2> line_3 = line_1 + line_2;
 			std::cout << "Successfully" << std::endl;
-			std::cout << line_1 << std::endl;
+			std::cout << line_3 << std::endl;
+			line_1 = line_3;
 			system("pause");
 		}
 		if (m1 == 53)
 		{
 			system("cls");
-			line_2 = line_2 + line_1;
+			Polyline<IntPoint2> line_3 = line_2 + line_1;
 			std::cout << "Successfully" << std::endl;
-			std::cout << line_2 << std::endl;
+			std::cout << line_3 << std::endl;
+			line_2 = line_3;
 			system("pause");
 		}
 		if (m1 == 54)
@@ -465,7 +467,7 @@ void PolylineOfPoints3()
 		if (m1 == 52)
 		{
 			system("cls");
-			line_1 = line_1 + line_2;
+			//line_1 = line_1 + line_2;
 			std::cout << "Successfully" << std::endl;
 			std::cout << line_1 << std::endl;
 			system("pause");
@@ -473,7 +475,7 @@ void PolylineOfPoints3()
 		if (m1 == 53)
 		{
 			system("cls");
-			line_2 = line_2 + line_1;
+			//line_2 = line_2 + line_1;
 			std::cout << "Successfully" << std::endl;
 			std::cout << line_2 << std::endl;
 			system("pause");
@@ -556,6 +558,7 @@ void PolylineOfComplex()
 						std::cin >> index;
 						std::cout << "(" << line_1[index].real() << "," << line_1[index].imag() << ")" << std::endl;
 						std::cout << "Enter the coordinates of the point: " << std::endl;
+						std::cout << "Enter real part: " << std::endl;
 						double _re = 0;
 						std::cin >> _re;
 						std::cout << "Enter imag part: " << std::endl;
@@ -647,6 +650,7 @@ void PolylineOfComplex()
 						std::cin >> index;
 						std::cout << "(" << line_2[index].real() << "," << line_2[index].imag() << ")" << std::endl;
 						std::cout << "Enter the coordinates of the point: " << std::endl;
+						std::cout << "Enter real part: " << std::endl;
 						double _re = 0;
 						std::cin >> _re;
 						std::cout << "Enter imag part: " << std::endl;
@@ -688,7 +692,7 @@ void PolylineOfComplex()
 		if (m1 == 52)
 		{
 			system("cls");
-			line_1 = line_1 + line_2;
+			//line_1 = line_1 + line_2;
 			std::cout << "Successfully" << std::endl;
 			std::cout << line_1 << std::endl;
 			system("pause");
@@ -696,7 +700,7 @@ void PolylineOfComplex()
 		if (m1 == 53)
 		{
 			system("cls");
-			line_2 = line_2 + line_1;
+			//line_2 = line_2 + line_1;
 			std::cout << "Successfully" << std::endl;
 			std::cout << line_2 << std::endl;
 			system("pause");
