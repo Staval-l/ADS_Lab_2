@@ -2,7 +2,6 @@
 #include <conio.h>
 #include <math.h>
 #include <complex>
-#include <vector>
 #include "Polyline.h"
 
 int GetKey()
@@ -236,19 +235,17 @@ void PolylineOfPoints2()
 		if (m1 == 52)
 		{
 			system("cls");
-			Polyline<IntPoint2> line_3 = line_1 + line_2;
+			line_1 = line_1 + line_2;
 			std::cout << "Successfully" << std::endl;
-			std::cout << line_3 << std::endl;
-			line_1 = line_3;
+			std::cout << line_1 << std::endl;
 			system("pause");
 		}
 		if (m1 == 53)
 		{
 			system("cls");
-			Polyline<IntPoint2> line_3 = line_2 + line_1;
+			line_2 = line_2 + line_1;
 			std::cout << "Successfully" << std::endl;
-			std::cout << line_3 << std::endl;
-			line_2 = line_3;
+			std::cout << line_2 << std::endl;
 			system("pause");
 		}
 		if (m1 == 54)
@@ -467,7 +464,7 @@ void PolylineOfPoints3()
 		if (m1 == 52)
 		{
 			system("cls");
-			//line_1 = line_1 + line_2;
+			line_1 = line_1 + line_2;
 			std::cout << "Successfully" << std::endl;
 			std::cout << line_1 << std::endl;
 			system("pause");
@@ -475,7 +472,7 @@ void PolylineOfPoints3()
 		if (m1 == 53)
 		{
 			system("cls");
-			//line_2 = line_2 + line_1;
+			line_2 = line_2 + line_1;
 			std::cout << "Successfully" << std::endl;
 			std::cout << line_2 << std::endl;
 			system("pause");
@@ -692,7 +689,7 @@ void PolylineOfComplex()
 		if (m1 == 52)
 		{
 			system("cls");
-			//line_1 = line_1 + line_2;
+			line_1 = line_1 + line_2;
 			std::cout << "Successfully" << std::endl;
 			std::cout << line_1 << std::endl;
 			system("pause");
@@ -700,7 +697,7 @@ void PolylineOfComplex()
 		if (m1 == 53)
 		{
 			system("cls");
-			//line_2 = line_2 + line_1;
+			line_2 = line_2 + line_1;
 			std::cout << "Successfully" << std::endl;
 			std::cout << line_2 << std::endl;
 			system("pause");
