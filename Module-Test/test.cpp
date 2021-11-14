@@ -1,6 +1,5 @@
 #include "pch.h"
 #include <complex>
-#include <vector>
 #include "../ADS_Lab_2/Polyline.h"
 
 TEST(Polyline, Vertex) {
