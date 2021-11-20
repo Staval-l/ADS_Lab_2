@@ -12,6 +12,32 @@ TEST(Polyline, Constructor)
 	EXPECT_EQ(0, p_3.Vertex());
 }
 
+TEST(Polyline, ConstructorCopy)
+{
+	Polyline<IntPoint2> p_1;
+	IntPoint2 p;
+	p._x = 1;
+	p._y = 1;
+	p_1.AddToEnd(p);
+	Polyline<IntPoint2> p_2(p_1);
+	EXPECT_EQ(1, p_2.Vertex());
+
+	Polyline<DoublePoint3> p_3;
+	DoublePoint3 s;
+	s._x = 1;
+	s._y = 1;
+	s._z = 1;
+	p_3.AddToEnd(s);
+	Polyline<DoublePoint3> p_4(p_3);
+	EXPECT_EQ(1, p_4.Vertex());
+
+	Polyline<std::complex<double>> p_5;
+	std::complex<double> t(1, 1);
+	p_5.AddToEnd(t);
+	Polyline<std::complex<double>> p_6(p_5);
+	EXPECT_EQ(1, p_6.Vertex());
+}
+
 TEST(Polyline, Vertex) {
 	Polyline<IntPoint2> p_1;
 	IntPoint2 p;
