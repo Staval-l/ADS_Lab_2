@@ -2,6 +2,16 @@
 #include <complex>
 #include "../ADS_Lab_2/Polyline.h"
 
+TEST(Polyline, Constructor)
+{
+	Polyline<IntPoint2> p_1;
+	Polyline<DoublePoint3> p_2;
+	Polyline<std::complex<double>> p_3;
+	EXPECT_EQ(0, p_1.Vertex());
+	EXPECT_EQ(0, p_2.Vertex());
+	EXPECT_EQ(0, p_3.Vertex());
+}
+
 TEST(Polyline, Vertex) {
 	Polyline<IntPoint2> p_1;
 	IntPoint2 p;

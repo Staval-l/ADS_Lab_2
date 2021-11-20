@@ -58,6 +58,7 @@ template <class T>
 class Polyline {
 	std::vector<T> v;
 public:
+	Polyline();
 	size_t Vertex() const;
 	auto GetLenght() const;
 	void AddToHead(const T& point);
@@ -81,6 +82,9 @@ std::ostream& operator<< (std::ostream& out, const Polyline<T>& polyline)
 	out << ">";
 	return out;
 }
+
+template<class T>
+Polyline<T>::Polyline() {}
 
 template <class T>
 size_t Polyline<T>::Vertex() const
