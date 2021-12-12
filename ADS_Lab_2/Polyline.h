@@ -121,12 +121,20 @@ auto Polyline<std::complex<double>>::GetLenght() const
 template <class T>
 void Polyline<T>::AddToHead(const T& point)
 {
+	for (size_t i = 0; i < Vertex(); i++)
+	{
+		if (v[i] == point) throw "\nThis point is already exist. Enter another coordinates: ";
+	}
 	v.insert(v.begin(), point);
 }
 
 template <class T>
 void Polyline<T>::AddToEnd(const T& point)
 {
+	for (size_t i = 0; i < Vertex(); i++)
+	{
+		if (v[i] == point) throw "\nThis point is already exist. Enter another coordinates: ";
+	}
 	v.push_back(point);
 }
 
