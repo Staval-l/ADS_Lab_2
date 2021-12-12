@@ -43,6 +43,25 @@ int ThirdMenu()
 	}
 }
 
+int GetInt()
+{
+	int value;
+	while (true)
+	{
+		std::cin >> value;
+		if (std::cin.fail())
+		{
+			std::cin.clear();
+			//std::cout « "Enter int value: " « std::endl;
+			std::cin.get();
+			//system("pause");
+			std::cin >> value;
+		}
+		else break;
+	}
+	return value;
+}
+
 void PolylineOfPoints2()
 {
 	Polyline<IntPoint2> line_1, line_2;
@@ -508,11 +527,9 @@ void PolylineOfComplex()
 					system("cls");
 					std::cout << "Enter the coordinates of the point: " << std::endl;
 					std::cout << "Enter real part: " << std::endl;
-					double _re = 0;
-					std::cin >> _re;
+					int _re = GetInt();
 					std::cout << "Enter imag part: " << std::endl;
-					double _im = 0;
-					std::cin >> _im;
+					int _im = GetInt();
 					std::complex<double> p(_re, _im);
 					try
 					{
@@ -529,11 +546,9 @@ void PolylineOfComplex()
 					system("cls");
 					std::cout << "Enter the coordinates of the point: " << std::endl;
 					std::cout << "Enter real part: " << std::endl;
-					double _re = 0;
-					std::cin >> _re;
+					int _re = GetInt();
 					std::cout << "Enter imag part: " << std::endl;
-					double _im = 0;
-					std::cin >> _im;
+					int _im = GetInt();
 					std::complex<double> p(_re, _im);
 					try
 					{
@@ -556,11 +571,9 @@ void PolylineOfComplex()
 						std::cout << "(" << line_1[index].real() << "," << line_1[index].imag() << ")" << std::endl;
 						std::cout << "Enter the coordinates of the point: " << std::endl;
 						std::cout << "Enter real part: " << std::endl;
-						double _re = 0;
-						std::cin >> _re;
+						int _re = GetInt();
 						std::cout << "Enter imag part: " << std::endl;
-						double _im = 0;
-						std::cin >> _im;
+						int _im = GetInt();
 						std::complex<double> p(_re, _im);
 						line_1[index] = p;
 					}
@@ -600,11 +613,9 @@ void PolylineOfComplex()
 					system("cls");
 					std::cout << "Enter the coordinates of the point: " << std::endl;
 					std::cout << "Enter real part: " << std::endl;
-					double _re = 0;
-					std::cin >> _re;
+					int _re = GetInt();
 					std::cout << "Enter imag part: " << std::endl;
-					double _im = 0;
-					std::cin >> _im;
+					int _im = GetInt();
 					std::complex<double> p(_re, _im);
 					try
 					{
@@ -621,11 +632,9 @@ void PolylineOfComplex()
 					system("cls");
 					std::cout << "Enter the coordinates of the point: " << std::endl;
 					std::cout << "Enter real part: " << std::endl;
-					double _re = 0;
-					std::cin >> _re;
+					int _re = GetInt();
 					std::cout << "Enter imag part: " << std::endl;
-					double _im = 0;
-					std::cin >> _im;
+					int _im = GetInt();
 					std::complex<double> p(_re, _im);
 					try
 					{
@@ -648,11 +657,9 @@ void PolylineOfComplex()
 						std::cout << "(" << line_2[index].real() << "," << line_2[index].imag() << ")" << std::endl;
 						std::cout << "Enter the coordinates of the point: " << std::endl;
 						std::cout << "Enter real part: " << std::endl;
-						double _re = 0;
-						std::cin >> _re;
+						int _re = GetInt();
 						std::cout << "Enter imag part: " << std::endl;
-						double _im = 0;
-						std::cin >> _im;
+						int _im = GetInt();
 						std::complex<double> p(_re, _im);
 						line_2[index] = p;
 					}
