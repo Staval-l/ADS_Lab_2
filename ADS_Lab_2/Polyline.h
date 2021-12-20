@@ -63,12 +63,26 @@ public:
 	auto GetLenght() const;
 	void AddToHead(const T& point);
 	void AddToEnd(const T& point);
+	auto Begin() const;
+	auto End() const;
 	T& operator [] (const size_t index);
 	T operator [] (const size_t index) const;
 	Polyline operator + (const Polyline& polyline);
 	bool operator == (const Polyline& polyline) const;
 	bool operator != (const Polyline& polyline) const;
 };
+
+template<class T>
+auto Polyline<T>::Begin() const
+{
+	return v.begin();
+}
+
+template<class T>
+auto Polyline<T>::End() const
+{
+	return v.end();
+}
 
 template <class T>
 std::ostream& operator<< (std::ostream& out, const Polyline<T>& polyline)
@@ -121,9 +135,9 @@ auto Polyline<std::complex<double>>::GetLenght() const
 template <class T>
 void Polyline<T>::AddToHead(const T& point)
 {
-	for (size_t i = 0; i < Vertex(); i++)
+	for (auto i = Begin(); i != End(); ++i)
 	{
-		if (v[i] == point) throw "\nThis point is already exist. Enter another coordinates: ";
+		if (*i == point) throw "\nThis point is already exist. Enter another coordinates: ";
 	}
 	v.insert(v.begin(), point);
 }
@@ -131,9 +145,9 @@ void Polyline<T>::AddToHead(const T& point)
 template <class T>
 void Polyline<T>::AddToEnd(const T& point)
 {
-	for (size_t i = 0; i < Vertex(); i++)
+	for (auto i = Begin(); i != End(); ++i)
 	{
-		if (v[i] == point) throw "\nThis point is already exist. Enter another coordinates: ";
+		if (*i == point) throw "\nThis point is already exist. Enter another coordinates: ";
 	}
 	v.push_back(point);
 }
